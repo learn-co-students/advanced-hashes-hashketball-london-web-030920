@@ -1,4 +1,4 @@
-require = 'pry'
+require 'pry'
 
 def game_hash
   {
@@ -201,6 +201,7 @@ def player_stats(players_name)
 end
 
 def big_shoe_rebounds
+
 shoe_size_hash = {}
 
   game_hash.each do |home_away, team|
@@ -215,20 +216,71 @@ shoe_size_hash = {}
     end
   end
 
+shoe_size_hash = shoe_size_hash.sort { |l, r| l[1]<=>r[1] }
 
-shoe_size_hash.sort
+person_with_biggest_feet = shoe_size_hash[-1][0]
+
+  game_hash.each do |home_away, team|
+    team.each do |attribute, data|
+      if attribute == :players
+        data.each do |player|
+          if player[:player_name] == person_with_biggest_feet
+            return player[:rebounds]
+          end
+        end
+      end
+    end
+  end
 end
 
-# player_with_biggest_shoes =
+# BELOW IS ME STARTING EXTRAS - GOT AS FAR AS 2ND one
+
+# def most_points_scored
 #
-#   game_hash.each do |home_away, team|
-#     team.each do |attribute, data|
-#       if attribute == :players
-#         data.each do |player|
-#           if player[:player_name] == player_with_biggest_shoes
-#             return player[:rebounds]
+#   points_hash = {}
+#
+#     game_hash.each do |home_away, team|
+#       team.each do |attribute, data|
+#         if attribute == :players
+#           data.each do |player|
+#
+#               points_hash[player[:player_name]] = player[:points]
+#
 #           end
 #         end
 #       end
 #     end
-#   end
+#
+#   points_hash = points_hash.sort { |l, r| l[1]<=>r[1] }
+#
+#   person_with_most_points = points_hash[-1][0]
+#
+# end
+#
+# def winning_team
+#   points_hash = {}
+#
+#     game_hash.each do |home_away, team|
+#       if home_away == :home
+#       team.each do |attribute, data|
+#         if attribute == :players
+#           data.each do |player|
+#
+#               points_hash[player[:player_name]] = player[:points]
+#
+#           end
+#         end
+#       end
+#     end
+#     end
+#
+# # total = 0
+# # counter = 0
+# # while counter < points_hash.length
+# # total += points_hash[0][0]
+# # counter += 1
+# # end
+#
+# points_hash
+#
+# end
